@@ -81,7 +81,7 @@ Scratch/                                                  experiments unrelated 
 
 ### Setup
 
-- [ ] **1. Retire `book-fpinlean`** — add a `Superseded by hypatia-tile/fplean`
+- [x] **1. Retire `book-fpinlean`** — add a `Superseded by hypatia-tile/fplean`
       pointer to the top of its README, commit, push, and archive the repository
       on GitHub. Done outside this repository's working contract.
 - [ ] **2. Nix flake providing Lean v4.33.0** — `flake.nix`, `flake.lock`,
