@@ -1,3 +1,4 @@
+.lake/
 .direnv/
 .env*
 !.envrc.example
