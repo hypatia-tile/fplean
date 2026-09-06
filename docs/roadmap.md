@@ -23,6 +23,10 @@ Read this before starting or reviewing any step.
 - **Commits go straight to `main` and are pushed.** Never amend: a review is
   pinned to a commit hash, and amending orphans the hash the review comment
   points at. Fixes are stacked as new commits.
+- **One logical change per commit.** A step usually produces several. Do not
+  bundle unrelated concerns — the toolchain pin, the direnv setup, and the
+  ignore rules are three changes, not one. The test is whether any single one
+  could be reverted on its own without dragging the others with it.
 - **One step at a time.** A new step does not start while the previous step's
   issue is open or the working tree is dirty.
 
