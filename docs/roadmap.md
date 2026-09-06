@@ -14,6 +14,12 @@ Read this before starting or reviewing any step.
 - **The user writes all code.** Lean source, `flake.nix`, `lakefile.toml`,
   `README.md`, workflow YAML — everything committed to this repository except
   `docs/roadmap.md` is written by hand by the user.
+- **Nix is transcribed; everything else is written from scratch.** Nix is new
+  ground, so for `flake.nix` and other Nix expressions the AI supplies the full
+  text, the user types it in, and the understanding is chased down afterwards by
+  asking. This is the single exception to the rule above, and it is deliberately
+  narrow: it covers Nix and nothing else. Lean, `lakefile.toml` and workflow YAML
+  stay hand-written.
 - **The AI writes `docs/roadmap.md` and GitHub issues only.** Specs, review
   comments, and roadmap checkboxes. It never writes code, not even to unblock a
   stuck step. When the user is stuck, it gives a graded hint first and the
