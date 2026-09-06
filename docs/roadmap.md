@@ -39,9 +39,22 @@ Read this before starting or reviewing any step.
 ## Environment
 
 - Lean is supplied by [`lenianiva/lean4-nix`](https://github.com/lenianiva/lean4-nix)
-  through `readToolchainFile ./lean-toolchain`. Its `binary` argument defaults
-  to `true`, so the official prebuilt release is fetched rather than Lean being
-  built from source.
+  through `readToolchainFile`, whose `binary` argument the flake selects per
+  system: **the prebuilt release on Linux, a source build on darwin.**
+  The prebuilt macOS archive cannot be realised by Nix at all — its dylibs carry
+  `@rpath` install names and nixpkgs' `fixDarwinDylibNames` hook cannot rewrite
+  them, which is [lean4-nix#76](https://github.com/lenianiva/lean4-nix/issues/76),
+  open since 2025-10 and independent of the Lean version pinned. Source-built
+  libraries are linked against their final store paths, so the hook has nothing
+  to rewrite. Linux is unaffected and keeps the fast path, which also keeps CI
+  fast.
+- **The darwin source build takes about 80 minutes**, once. `lake --version`
+  reporting `5.0.0-src` is how you tell you are on the source path.
+- `nixpkgs` follows `lean4-nix/nixpkgs` rather than carrying its own URL. This
+  is not cosmetic: nixpkgs supplies the compiler and every C dependency, all of
+  which enter Lean's derivation hash. Pointing it elsewhere makes every hash
+  differ, forfeits the upstream binary cache, and discards the source build
+  already in the local store.
 - `lean-toolchain` pins `leanprover/lean4:v4.33.1`, the latest stable release
   (2026-08-21). Note that the book states its samples are validated against
   4.33.0, one patch release behind; when a sample does not compile, the version
