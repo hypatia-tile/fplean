@@ -32,8 +32,10 @@ Read this before starting or reviewing any step.
   through `readToolchainFile ./lean-toolchain`. Its `binary` argument defaults
   to `true`, so the official prebuilt release is fetched rather than Lean being
   built from source.
-- `lean-toolchain` pins `leanprover/lean4:v4.33.0` — the release the book states
-  its code samples are validated against.
+- `lean-toolchain` pins `leanprover/lean4:v4.33.1`, the latest stable release
+  (2026-08-21). Note that the book states its samples are validated against
+  4.33.0, one patch release behind; when a sample does not compile, the version
+  gap is a candidate explanation before your own typo is.
 - The flake exposes **a devShell only**. No `buildLeanPackage`, no
   `packages.default`: those require listing module roots in `flake.nix`, which
   would mean editing Nix every time a section is added. Builds are driven by
@@ -84,9 +86,9 @@ Scratch/                                                  experiments unrelated 
 - [x] **1. Retire `book-fpinlean`** — add a `Superseded by hypatia-tile/fplean`
       pointer to the top of its README, commit, push, and archive the repository
       on GitHub. Done outside this repository's working contract.
-- [ ] **2. Nix flake providing Lean v4.33.0** — `flake.nix`, `flake.lock`,
+- [ ] **2. Nix flake providing Lean v4.33.1** — `flake.nix`, `flake.lock`,
       `lean-toolchain`, `.envrc`, `.gitignore`. Verified by `lean --version`
-      reporting 4.33.0 inside the direnv environment.
+      reporting 4.33.1 inside the direnv environment.
 - [ ] **3. Lake package skeleton** — `lakefile.toml`, `FpInLean.lean`,
       `Scratch.lean`, `LICENSE`, `README.md`. Verified by `lake build` and
       `lake build Scratch` both succeeding. The README carries the CC BY 4.0
