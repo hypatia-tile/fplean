@@ -109,7 +109,7 @@ Scratch/                                                  experiments unrelated 
 - [x] **1. Retire `book-fpinlean`** — add a `Superseded by hypatia-tile/fplean`
       pointer to the top of its README, commit, push, and archive the repository
       on GitHub. Done outside this repository's working contract.
-- [ ] **2. Nix flake providing Lean v4.33.1** — `flake.nix`, `flake.lock`,
+- [x] **2. Nix flake providing Lean v4.33.1** — `flake.nix`, `flake.lock`,
       `lean-toolchain`, `.envrc`, `.gitignore`. Verified by `lean --version`
       reporting 4.33.1 inside the direnv environment.
 - [ ] **3. Lake package skeleton** — `lakefile.toml`, `FpInLean.lean`,
