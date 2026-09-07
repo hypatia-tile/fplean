@@ -11,14 +11,14 @@ carried over. This repository starts at chapter 3 and supersedes that one.
 
 Read this before starting or reviewing any step.
 
-- **The user writes all code.** Lean source, `flake.nix`, `lakefile.toml`,
+- **The user writes all code.** Lean source, `flake.nix`, `lakefile.lean`,
   `README.md`, workflow YAML — everything committed to this repository except
   `docs/roadmap.md` is written by hand by the user.
 - **Nix is transcribed; everything else is written from scratch.** Nix is new
   ground, so for `flake.nix` and other Nix expressions the AI supplies the full
   text, the user types it in, and the understanding is chased down afterwards by
   asking. This is the single exception to the rule above, and it is deliberately
-  narrow: it covers Nix and nothing else. Lean, `lakefile.toml` and workflow YAML
+  narrow: it covers Nix and nothing else. Lean, `lakefile.lean` and workflow YAML
   stay hand-written.
 - **The AI writes `docs/roadmap.md` and GitHub issues only.** Specs, review
   comments, and roadmap checkboxes. It never writes code, not even to unblock a
@@ -84,10 +84,18 @@ Scratch/                                                  experiments unrelated 
 - Each file opens a namespace named after its section, so **modules may import
   each other**. Later sections that build on earlier ones import and `open`
   them; sections that redefine a name simply do not `open` it.
-- `lakefile.toml` declares two libraries: `FpInLean` (globbed as `FpInLean.*`,
-  in `defaultTargets`) and `Scratch` (**not** in `defaultTargets`), so a
-  half-finished experiment never turns `lake build` red. Check it explicitly
-  with `lake build Scratch`.
+- **`lakefile.lean`, not `lakefile.toml`.** The build definition is written in
+  Lake's Lean DSL, so that even the packaging is Lean. Most examples in the wild
+  are TOML and need translating as you read them.
+- It declares two libraries: `FpInLean`, in `defaultTargets`, and `Scratch`,
+  **not** in `defaultTargets`, so a half-finished experiment never turns
+  `lake build` red. Check that one explicitly with `lake build Scratch`.
+- Each library takes a `globs` entry so modules are found by existing on disk
+  rather than by being imported. `.andSubmodules \`X` covers `X` and everything
+  beneath it to any depth; `.submodules \`X` covers everything beneath but not
+  `X` itself. **`defaultTargets` must not be omitted**: without it `lake build`
+  reports `no targets specified` and `Nothing to build`, which reads as success
+  while checking nothing.
 - No `notes/` directory. What was learned lives in the issue spec, the review
   comment, and comments inside the `.lean` files.
 
@@ -112,7 +120,7 @@ Scratch/                                                  experiments unrelated 
 - [x] **2. Nix flake providing Lean v4.33.1** — `flake.nix`, `flake.lock`,
       `lean-toolchain`, `.envrc`, `.gitignore`. Verified by `lean --version`
       reporting 4.33.1 inside the direnv environment.
-- [ ] **3. Lake package skeleton** — `lakefile.toml`, `FpInLean.lean`,
+- [ ] **3. Lake package skeleton** — `lakefile.lean`, `FpInLean.lean`,
       `Scratch.lean`, `LICENSE`, `README.md`. Verified by `lake build` and
       `lake build Scratch` both succeeding. The README carries the CC BY 4.0
       attribution described below.
