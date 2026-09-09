@@ -1,0 +1,1 @@
+def sampleHello : String := "Hello"
