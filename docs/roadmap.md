@@ -26,6 +26,10 @@ Read this before starting or reviewing any step.
   answer only if that fails.
 - **Everything is written in English** — this file, `README.md`, comments inside
   `.lean` files, issue bodies, review comments, and commit messages.
+- **The AI may run `git commit` on the user's behalf.** Authorship is unchanged
+  — the code is still the user's — but the commit message is where the *why*
+  gets recorded, so the AI prints every message before committing and the user
+  says when it is wrong.
 - **Commits go straight to `main` and are pushed.** Never amend: a review is
   pinned to a commit hash, and amending orphans the hash the review comment
   points at. Fixes are stacked as new commits.
