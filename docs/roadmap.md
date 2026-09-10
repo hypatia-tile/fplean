@@ -130,7 +130,7 @@ Scratch/                                                  experiments unrelated 
 - [x] **2. Nix flake providing Lean v4.33.1** — `flake.nix`, `flake.lock`,
       `lean-toolchain`, `.envrc`, `.gitignore`. Verified by `lean --version`
       reporting 4.33.1 inside the direnv environment.
-- [ ] **3. Lake package skeleton** — `lakefile.lean`, `FpInLean.lean`,
+- [x] **3. Lake package skeleton** — `lakefile.lean`, `FpInLean.lean`,
       `Scratch.lean`, `LICENSE`, `README.md`. Verified by `lake build` and
       `lake build Scratch` both succeeding. The README carries the CC BY 4.0
       attribution described below.
