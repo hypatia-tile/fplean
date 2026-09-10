@@ -73,6 +73,12 @@ Read this before starting or reviewing any step.
 - `.envrc` uses `use flake`. **Neovim must be started from inside this
   directory** so that direnv has already put `lake` on `PATH`; a Neovim launched
   elsewhere will fail to start the Lean language server.
+- **Editing `flake.nix` or `lean-toolchain` does not take effect on its own.**
+  `direnv status` shows that only `.envrc` is watched, so direnv keeps serving
+  the profile it already realised and the edited file is never read — a broken
+  toolchain file can look perfectly healthy. `direnv reload` forces direnv to
+  redo its side; `nix eval .#devShells.<system>.default.drvPath` forces
+  evaluation outright and is the way to find out what the flake really says.
 
 ## Layout
 
