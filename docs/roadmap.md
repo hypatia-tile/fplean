@@ -39,6 +39,13 @@ Read this before starting or reviewing any step.
   could be reverted on its own without dragging the others with it.
 - **One step at a time.** A new step does not start while the previous step's
   issue is open or the working tree is dirty.
+- **Progress may outrun understanding, but the gap is written down.** When
+  something is transcribed, deferred, or explained without landing, it becomes an
+  issue labelled `comprehension` describing what was skipped and what
+  understanding it would take to close. These are debts, not tasks: they are
+  **not** step issues, they do **not** block starting a step, and the
+  one-step-at-a-time rule above ignores them entirely. They exist so that moving
+  fast stays a choice rather than a quiet loss.
 
 ## Environment
 
