@@ -30,9 +30,16 @@ Read this before starting or reviewing any step.
   — the code is still the user's — but the commit message is where the *why*
   gets recorded, so the AI prints every message before committing and the user
   says when it is wrong.
-- **Commits go straight to `main` and are pushed.** Never amend: a review is
-  pinned to a commit hash, and amending orphans the hash the review comment
-  points at. Fixes are stacked as new commits.
+- **Commits go straight to `main` and are pushed.** Never amend a pushed
+  commit: a review is pinned to a commit hash, and amending orphans the hash
+  the review comment points at. Fixes to pushed work are stacked as new
+  commits.
+- **An unpushed commit may be amended, but that is decided case by case.**
+  Nothing can point at a hash that has never left the machine, so amending
+  loses no reference. It can still lose history worth keeping: when the point
+  is that something went wrong first, the fix is deliberately stacked so the
+  mistake stays visible. Talk it over before amending rather than defaulting
+  either way.
 - **One logical change per commit.** A step usually produces several. Do not
   bundle unrelated concerns — the toolchain pin, the direnv setup, and the
   ignore rules are three changes, not one. The test is whether any single one
