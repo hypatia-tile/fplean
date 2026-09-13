@@ -142,8 +142,11 @@ Scratch/                                                  experiments unrelated 
       `lake build Scratch` both succeeding. The README carries the CC BY 4.0
       attribution described below.
 - [ ] **4. CI** — GitHub Actions on `ubuntu-latest` running
-      `nix develop -c lake build`, with the Nix store cached so the ~2.7 GB
-      toolchain is not refetched on every run.
+      `nix develop -c lake build`. **No Nix store cache**: an uncached run
+      takes about 72 s, of which the toolchain is roughly a minute, so a cache
+      would not pay for itself (measured on #8). Revisit if the job regularly
+      takes several minutes; the garnix substituter is the targeted fix for
+      the toolchain stretch.
 
 ### Chapter 3: Overloading and Type Classes
 
