@@ -53,6 +53,12 @@ Read this before starting or reviewing any step.
   **not** step issues, they do **not** block starting a step, and the
   one-step-at-a-time rule above ignores them entirely. They exist so that moving
   fast stays a choice rather than a quiet loss.
+- **Review findings can be deferred instead of fixed.** Once no must-fix
+  finding remains, the "Your call" and "Minor" findings the user chooses to
+  leave are gathered into one issue labelled `deferred`. It supersedes them on
+  the step issue, which can then close. Like `comprehension` issues, `deferred`
+  issues do **not** block a step. Pick them up when the area is next touched, or
+  close them as not worth doing.
 
 ## Environment
 
