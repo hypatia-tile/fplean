@@ -8,6 +8,17 @@ inductive Pos where
 
 -- Currently, we cannot use number literal to represent a value of the type
 -- Pos.
+
+/--
+info: failed to synthesize instance of type class
+  OfNat Pos 7
+numerals are polymorphic in Lean, but the numeral `7` cannot be used in a context where the expected type is
+  Pos
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
 #check_failure (7 : Pos)
 
 -- Instead, we have to define @seven@ as following:
@@ -15,7 +26,21 @@ def seven : Pos :=
   Pos.succ (Pos.succ (Pos.succ (Pos.succ (Pos.succ (Pos.succ Pos.one)))))
 
 -- Addition and multiplication are not easy to use.
+/--
+info: failed to synthesize instance of type class
+  HAdd Pos Pos ?m.3
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
 #check_failure seven + seven
+/--
+info: failed to synthesize instance of type class
+  HMul Pos Pos ?m.3
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
 #check_failure seven * seven
 
 -- 3.1.1. Classes and Instances
@@ -61,6 +86,10 @@ def posToString (atTop : Bool) (p : Pos) : String :=
 instance : ToString Pos where
   toString := posToString true
 
+/--
+info: "There are Pos.succ (Pos.succ (Pos.succ (Pos.succ (Pos.succ (Pos.succ Pos.one)))))"
+-/
+#guard_msgs in
 #eval s!"There are {seven}"
 
 def Pos.toNat : Pos → Nat
@@ -70,6 +99,10 @@ def Pos.toNat : Pos → Nat
 instance : ToString Pos where
   toString x := toString <| x.toNat
 
+/--
+info: "There are 7"
+-/
+#guard_msgs in
 #eval s!"There are {seven}"
 
 -- 3.1.4. Overloaded Multiplication
@@ -81,6 +114,10 @@ def Pos.mul : Pos → Pos → Pos
 instance : Mul Pos where
   mul := Pos.mul
 
+/--
+info: [7, 49, 14]
+-/
+#guard_msgs in
 #eval [seven * Pos.one,
   seven * seven,
   .succ .one * seven]
@@ -117,7 +154,21 @@ def LT4.toNat : LT4 → Nat
 instance : ToString LT4 where
   toString n := toString <| n.toNat
 
+/--
+info: [0, 1, 2, 3]
+-/
+#guard_msgs in
 #eval ([0, 1, 2, 3] : List LT4)
+/--
+info: failed to synthesize instance of type class
+  OfNat LT4 4
+numerals are polymorphic in Lean, but the numeral `4` cannot be used in a context where the expected type is
+  LT4
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
 #check_failure (4 : LT4)
 
 end Digression
@@ -131,6 +182,16 @@ instance : OfNat Pos (n + 1) where
 
 def eight : Pos := 8
 
+/--
+info: failed to synthesize instance of type class
+  OfNat Pos 0
+numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is
+  Pos
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
 #check_failure (0 : Pos)
 
 end PositiveNumbers
