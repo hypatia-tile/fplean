@@ -162,12 +162,15 @@ namespace «3.1.5»
 instance : One Pos where
   one := .one
 
+#guard 1 = Pos.one
+
 namespace Digression
 inductive LT4 where
   | zero
   | one
   | two
   | three
+  deriving DecidableEq
 
 instance : OfNat LT4 0 where
   ofNat := .zero
@@ -177,6 +180,7 @@ instance : OfNat LT4 1 where
 
 instance : OfNat LT4 2 where
   ofNat := .two
+
 instance : OfNat LT4 3 where
   ofNat := .three
 
@@ -189,11 +193,10 @@ def LT4.toNat : LT4 → Nat
 instance : ToString LT4 where
   toString n := toString <| n.toNat
 
-/--
-info: [0, 1, 2, 3]
--/
-#guard_msgs in
-#eval ([0, 1, 2, 3] : List LT4)
+#guard 3 = LT4.three
+#guard 0 = LT4.zero
+
+#guard [0, 1, 2, 3] = [LT4.zero, .one, .two, .three]
 /--
 info: failed to synthesize instance of type class
   OfNat LT4 4
