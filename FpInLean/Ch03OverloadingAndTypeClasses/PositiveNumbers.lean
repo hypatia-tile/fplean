@@ -45,6 +45,7 @@ Hint: Type class instance resolution failures can be inspected with the `set_opt
 
 -- 3.1.1. Classes and Instances
 
+namespace «3.1.1»
 -- Declare a typeclass Plus
 class Plus (α : Type) where
   plus : α → α → α
@@ -73,24 +74,33 @@ info: plus 5.2 917.25861 : Float
 -- Define the addition on Pos type.
 def Pos.plus : Pos → Pos → Pos
   | .one, k => k.succ
-  | .succ n, k => .succ <| n.plus k
+  | .succ n, k => .succ <| Pos.plus n k
 
 -- Declare an instance of Plus typeclass for Pos.
 instance : Plus Pos where
   plus := Pos.plus
 
--- def fourteen : Pos := plus seven seven
+def fourteen : Pos := plus seven seven
+end «3.1.1»
+
+open «3.1.1» (Pos.plus)
 
 -- 3.1.2 Overloaded Addition
 
+namespace «3.1.2»
 -- To use '+' for addition, declare an Add instance.
 instance : Add Pos where
   add := Pos.plus
 
 def fourteen : Pos := seven + seven
 
+end «3.1.2»
+
+open «3.1.2» (fourteen)
+
 -- 3.1.3. Conversion to Strings
 
+namespace «3.1.3»
 def posToString (atTop : Bool) (p : Pos) : String :=
   let paren s := if atTop then s else "(" ++ s ++ ")"
   match p with
@@ -108,10 +118,10 @@ info: "There are Pos.succ (Pos.succ (Pos.succ (Pos.succ (Pos.succ (Pos.succ Pos.
 
 def Pos.toNat : Pos → Nat
   | .one => 1
-  | .succ n => .succ <| n.toNat
+  | .succ n => .succ <| Pos.toNat n
 
 instance : ToString Pos where
-  toString x := toString <| x.toNat
+  toString x := toString <| Pos.toNat x
 
 /--
 info: "There are 7"
@@ -119,11 +129,15 @@ info: "There are 7"
 #guard_msgs in
 #eval s!"There are {seven}"
 
+end «3.1.3»
+
 -- 3.1.4. Overloaded Multiplication
+
+namespace «3.1.4»
 
 def Pos.mul : Pos → Pos → Pos
   | .one, k => k
-  | .succ n, k => k + n.mul k
+  | .succ n, k => k + Pos.mul n k
 
 instance : Mul Pos where
   mul := Pos.mul
@@ -136,7 +150,11 @@ info: [7, 49, 14]
   seven * seven,
   .succ .one * seven]
 
+end «3.1.4»
+
 -- 3.1.5. Literal Numbers
+
+namespace «3.1.5»
 
 instance : One Pos where
   one := .one
@@ -207,5 +225,7 @@ Hint: Type class instance resolution failures can be inspected with the `set_opt
 -/
 #guard_msgs in
 #check_failure (0 : Pos)
+
+end «3.1.5»
 
 end PositiveNumbers
