@@ -56,6 +56,20 @@ open Plus (plus)
 instance : Plus Nat where
   plus m n := m + n
 
+/--
+info: failed to synthesize instance of type class
+  Plus Float
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+---
+info: plus 5.2 917.25861 : Float
+-/
+#guard_msgs in
+#check_failure plus 5.2 917.25861
+
+#guard plus 5 3 = 8
+#guard plus 3 5 = 8
+
 -- Define the addition on Pos type.
 def Pos.plus : Pos → Pos → Pos
   | .one, k => k.succ
