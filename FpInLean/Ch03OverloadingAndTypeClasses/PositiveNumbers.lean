@@ -5,6 +5,7 @@ namespace PositiveNumbers
 inductive Pos where
   | one
   | succ (n : Pos)
+  deriving DecidableEq
 
 -- Currently, we cannot use number literal to represent a value of the type
 -- Pos.
@@ -93,6 +94,8 @@ instance : Add Pos where
   add := Pos.plus
 
 def fourteen : Pos := seven + seven
+
+#guard «3.1.1».fourteen = fourteen
 
 end «3.1.2»
 
