@@ -234,4 +234,6 @@ Hint: Type class instance resolution failures can be inspected with the `set_opt
 
 end «3.1.5»
 
+#guard Pos.plus seven seven = 14
+
 end PositiveNumbers
