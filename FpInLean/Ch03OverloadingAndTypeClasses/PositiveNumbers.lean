@@ -234,6 +234,89 @@ Hint: Type class instance resolution failures can be inspected with the `set_opt
 
 end «3.1.5»
 
+section Own
+
 #guard Pos.plus seven seven = 14
+
+inductive Four where
+  | zero
+  | one
+  | two
+  | three
+  deriving DecidableEq
+
+class Zero (α : Type) where
+  zero : α
+
+instance : Zero Four where
+  zero := .zero
+
+/--
+info: failed to synthesize instance of type class
+  OfNat Four 0
+numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is
+  Four
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
+#check_failure (0 : Four)
+
+/--
+info: One : Type u_1 → Type u_1
+-/
+#guard_msgs in
+#check @_root_.One
+
+instance : OfNat Four 0 where
+  ofNat := .zero
+instance : OfNat Four 1 where
+  ofNat := .one
+instance : OfNat Four 2 where
+  ofNat := .two
+instance : OfNat Four 3 where
+  ofNat := .three
+instance [h : OfNat Four n] : OfNat Four (n + 4) where
+  ofNat := h.ofNat
+
+#guard 0 = Four.zero
+#guard 1 = Four.one
+#guard 2 = Four.two
+#guard 3 = Four.three
+#guard 21 = Four.one
+
+/--
+info: failed to synthesize instance of type class
+  OfNat Four 512
+numerals are polymorphic in Lean, but the numeral `512` cannot be used in a context where the expected type is
+  Four
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+-/
+#guard_msgs in
+#check_failure (512 : Four)
+
+instance : Add Four where
+  add a b :=
+    let addFour m n :=
+      match m, n with
+      | .zero, n => n
+      | m, .zero => m
+      | .one, .one => .two
+      | .one, .two => .three
+      | .one, .three => .zero
+      | .two, .one => .three
+      | .two, .two => .zero
+      | .two, .three => .one
+      | .three, .one => .zero
+      | .three, .two => .one
+      | .three, .three => .two
+    addFour a b
+
+#guard (510 : Four) + 511 = .one
+
+end Own
 
 end PositiveNumbers
