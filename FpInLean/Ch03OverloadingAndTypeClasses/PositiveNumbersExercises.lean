@@ -38,6 +38,8 @@ def eight := Even.add2 <| Even.add2 <| Even.add2 <| Even.add2 <| Even.zero
 
 #guard two + two = four
 #guard two * four = eight
+#guard two * Even.zero = Even.zero
+#guard Even.zero * two = Even.zero
 
 /--
 info: 2
