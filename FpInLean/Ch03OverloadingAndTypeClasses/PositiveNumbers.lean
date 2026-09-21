@@ -263,11 +263,20 @@ Hint: Type class instance resolution failures can be inspected with the `set_opt
 #guard_msgs in
 #check_failure (0 : Four)
 
+class One (α : Type) where
+  one : α
+
 /--
-info: One : Type u_1 → Type u_1
+info: _root_.One : Type u_1 → Type u_1
 -/
 #guard_msgs in
 #check @_root_.One
+
+/--
+info: PositiveNumbers.One (α : Type) : Type
+-/
+#guard_msgs in
+#check One
 
 instance : OfNat Four 0 where
   ofNat := .zero
