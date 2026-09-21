@@ -165,7 +165,7 @@ Scratch/                                                  experiments unrelated 
 
 Directory: `FpInLean/Ch03OverloadingAndTypeClasses/`
 
-- [ ] **5.** 3.1 [Positive Numbers](https://lean-lang.org/functional_programming_in_lean/Overloading-and-Type-Classes/Positive-Numbers/) — `PositiveNumbers.lean`
+- [x] **5.** 3.1 [Positive Numbers](https://lean-lang.org/functional_programming_in_lean/Overloading-and-Type-Classes/Positive-Numbers/) — `PositiveNumbers.lean`
 - [ ] **6.** 3.2 [Type Classes and Polymorphism](https://lean-lang.org/functional_programming_in_lean/Overloading-and-Type-Classes/Type-Classes-and-Polymorphism/) — `TypeClassesAndPolymorphism.lean`
 - [ ] **7.** 3.3 [Controlling Instance Search](https://lean-lang.org/functional_programming_in_lean/Overloading-and-Type-Classes/Controlling-Instance-Search/) — `ControllingInstanceSearch.lean`
 - [ ] **8.** 3.4 [Arrays and Indexing](https://lean-lang.org/functional_programming_in_lean/Overloading-and-Type-Classes/Arrays-and-Indexing/) — `ArraysAndIndexing.lean`
