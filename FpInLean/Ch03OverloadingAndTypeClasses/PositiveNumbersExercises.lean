@@ -62,6 +62,9 @@ end «3.1.6.1»
 
 namespace «3.1.6.2»
 
+-- Only even numbers: every value of Even is built only from zero or by adding
+-- two, so there is no way to write 3. Odd numbers are ruled out by the
+-- constructors, not by a check at run time.
 inductive Even where
   | zero
   | add2 (n : Even)
@@ -108,7 +111,6 @@ info: 2
 #eval two
 
 end «3.1.6.2»
-
 namespace «3.1.6.3»
 
 inductive HttpVersion where
