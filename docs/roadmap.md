@@ -7,58 +7,8 @@ Chapters 1, 2 and the first Interlude were read in
 [`book-fpinlean`](https://github.com/hypatia-tile/book-fpinlean) and are **not**
 carried over. This repository starts at chapter 3 and supersedes that one.
 
-## Working contract
-
-Read this before starting or reviewing any step.
-
-- **The user writes all code.** Lean source, `flake.nix`, `lakefile.lean`,
-  `README.md`, workflow YAML — everything committed to this repository except
-  `docs/roadmap.md` is written by hand by the user.
-- **Nix is transcribed; everything else is written from scratch.** Nix is new
-  ground, so for `flake.nix` and other Nix expressions the AI supplies the full
-  text, the user types it in, and the understanding is chased down afterwards by
-  asking. This is the single exception to the rule above, and it is deliberately
-  narrow: it covers Nix and nothing else. Lean, `lakefile.lean` and workflow YAML
-  stay hand-written.
-- **The AI writes `docs/roadmap.md` and GitHub issues only.** Specs, review
-  comments, and roadmap checkboxes. It never writes code, not even to unblock a
-  stuck step. When the user is stuck, it gives a graded hint first and the
-  answer only if that fails.
-- **Everything is written in English** — this file, `README.md`, comments inside
-  `.lean` files, issue bodies, review comments, and commit messages.
-- **The AI may run `git commit` on the user's behalf.** Authorship is unchanged
-  — the code is still the user's — but the commit message is where the *why*
-  gets recorded, so the AI prints every message before committing and the user
-  says when it is wrong.
-- **Commits go straight to `main` and are pushed.** Never amend a pushed
-  commit: a review is pinned to a commit hash, and amending orphans the hash
-  the review comment points at. Fixes to pushed work are stacked as new
-  commits.
-- **An unpushed commit may be amended, but that is decided case by case.**
-  Nothing can point at a hash that has never left the machine, so amending
-  loses no reference. It can still lose history worth keeping: when the point
-  is that something went wrong first, the fix is deliberately stacked so the
-  mistake stays visible. Talk it over before amending rather than defaulting
-  either way.
-- **One logical change per commit.** A step usually produces several. Do not
-  bundle unrelated concerns — the toolchain pin, the direnv setup, and the
-  ignore rules are three changes, not one. The test is whether any single one
-  could be reverted on its own without dragging the others with it.
-- **One step at a time.** A new step does not start while the previous step's
-  issue is open or the working tree is dirty.
-- **Progress may outrun understanding, but the gap is written down.** When
-  something is transcribed, deferred, or explained without landing, it becomes an
-  issue labelled `comprehension` describing what was skipped and what
-  understanding it would take to close. These are debts, not tasks: they are
-  **not** step issues, they do **not** block starting a step, and the
-  one-step-at-a-time rule above ignores them entirely. They exist so that moving
-  fast stays a choice rather than a quiet loss.
-- **Review findings can be deferred instead of fixed.** Once no must-fix
-  finding remains, the "Your call" and "Minor" findings the user chooses to
-  leave are gathered into one issue labelled `deferred`. It supersedes them on
-  the step issue, which can then close. Like `comprehension` issues, `deferred`
-  issues do **not** block a step. Pick them up when the area is next touched, or
-  close them as not worth doing.
+How a step is started and reviewed lives in `.claude/skills/step-start` and
+`.claude/skills/step-review` (mirrored under `.codex/skills`).
 
 ## Environment
 
