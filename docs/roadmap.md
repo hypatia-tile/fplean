@@ -43,12 +43,16 @@ How a step is started and reviewed lives in `.claude/skills/step-start` and
 - `.envrc` uses `use flake`. **Neovim must be started from inside this
   directory** so that direnv has already put `lake` on `PATH`; a Neovim launched
   elsewhere will fail to start the Lean language server.
-- **Editing `flake.nix` or `lean-toolchain` does not take effect on its own.**
-  `direnv status` shows that only `.envrc` is watched, so direnv keeps serving
-  the profile it already realised and the edited file is never read — a broken
-  toolchain file can look perfectly healthy. `direnv reload` forces direnv to
-  redo its side; `nix eval .#devShells.<system>.default.drvPath` forces
-  evaluation outright and is the way to find out what the flake really says.
+- **Editing `lean-toolchain` does not take effect on its own.** direnv
+  re-evaluates only when a watched file changes. `flake.nix` and `flake.lock`
+  are watched — see the `Loaded watch:` lines of `direnv status`; the shorter
+  `Found watch:` list below them omits them — but `lean-toolchain`, which the
+  overlay reads at evaluation time, is not. So direnv keeps serving the profile
+  it already realised and the edited file is never read — a broken toolchain
+  file can look perfectly healthy. `direnv reload` forces re-evaluation.
+  `nix eval .#devShells.<system>.default.drvPath` forces evaluation outright,
+  but on darwin it can start the source build (import from derivation); the
+  `x86_64-linux` attribute evaluates without building.
 
 ## Layout
 
